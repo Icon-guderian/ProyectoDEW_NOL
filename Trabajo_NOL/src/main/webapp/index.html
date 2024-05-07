@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Selector servlet</title>
+<script>
+        function selectServlet(servlet) {
+            document.getElementById("selectLog").value = servlet;
+            document.getElementById("form").action = servlet;
+        }
+</script>
+</head>
+<body>
+	<form method="get" id="form">
+        Usuario: <input type="text" name="user"></br>
+        Elige el servelt a usar: <br>
+        <input type="hidden" name="log" id="selectLog">
+        <input type="submit" value="Log0" onclick="selectServlet('log0')">
+        <input type="submit" value="Log1" onclick="selectServlet('log1')">
+        <input type="submit" value="Log2" onclick="selectServlet('log2')">
+    </form>
+</body>
+</html>
