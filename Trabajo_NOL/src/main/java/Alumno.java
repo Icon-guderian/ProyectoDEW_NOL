@@ -3,6 +3,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +16,10 @@ import org.json.JSONObject;
 
 @WebServlet("/dataServlet")
 public class DataServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
     private static final String BASE_URL = "http://localhost:9090/CentroEducativo/alumnos/";
+	private HashMap<String, String> asignaturasAlumno = new HashMap<String, String>();
     private HttpClient client;
 
     @Override
@@ -30,41 +34,15 @@ public class DataServlet extends HttpServlet {
         // Obtiene el parámetro 'action' para determinar qué operación realizar
         String action = request.getParameter("action");
         
-        // Selecciona la operación en función del parámetro 'action'
-
-        /**
-        switch(action){
-            case equals("login"): //Va a haber que sacar el login de aquí
-            //Y meterlo en otro .java junto con handleLogin() handleLogin lo mismo
-                handleLogin(request, response);
-                break;
-            case equals("detallesAsignatura"):
-                getAsignatura(request, response);
-                break;
-            case equals("listaAsignaturas"):
-                getListaAsignaturas(request, response);
-                break;
-        } **/
+        HttpSession session = request.getSession(false);
         
-        
-        
-    }
-
-    /**
-     * Maneja la operación de login.
-     * @param request  La solicitud HTTP recibida.
-     * @param response La respuesta HTTP a enviar.
-     * @throws IOException Si ocurre un error de E/S.
-     */
-    private void handleLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //Comprobamos si el usuario tiene una sesión
-        HttpSession session = request.getSession(true);
-        if(session.getAttribute("key") == null) {
+        if(session == null) {
             //Cogemos los datos del usuario y creamos el JSON
             String usuario = req.getRemoteUser();
             String user = usuarios.get(usuario).getDni();
             String pass = usuarios.get(usuario).getPassword();;
             JSONObject loginCredsJSON = new JSONObject();
+       
             loginCredsJSON.put("dni", user);
             loginCredsJSON.put("password", pass);
             StringEntity loginCredsString = new StringEntity(loginCredsJSON.toString());
@@ -93,8 +71,10 @@ public class DataServlet extends HttpServlet {
                     // Si la respuesta es un error, envía un código de error HTTP
                     response.sendError(httpResponse.statusCode(), "Login failed");
                 }
-    
+                
             }
+        
+        
     }
 
 
@@ -102,10 +82,7 @@ public class DataServlet extends HttpServlet {
         //Parámetros necesarios
         HttpSession sesion = request.getSession("false");
         String key = sesion.getAttribute("key");
-
         String acronimo = request.getParameter("acronimo");
-        
-
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
             .uri(URI.create(BASE_URL + "/asignaturas/" + acronimo + "?key=" + key))
@@ -117,6 +94,7 @@ public class DataServlet extends HttpServlet {
              // Envía la solicitud HTTP y obtiene la respuesta
              HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
              if (httpResponse.statusCode() == 200) {
+            	 
                  // Si la respuesta es exitosa, establece el tipo de contenido y envía la respuesta JSON
                  response.setContentType("application/json");
                  response.getWriter().write(httpResponse.body());
@@ -134,7 +112,8 @@ public class DataServlet extends HttpServlet {
          } catch (InterruptedException e) {
              // Maneja la interrupción de la solicitud
              response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Proceso interrumpido");
-        }
+         }
+    }
 
     private void getListaAsignaturas(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //Cogemos la clave

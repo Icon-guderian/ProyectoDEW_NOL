@@ -1,23 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Selector servlet</title>
-<script>
-        function selectServlet(servlet) {
-            document.getElementById("selectLog").value = servlet;
-            document.getElementById("form").action = servlet;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notas Online</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 3rem;
+            background-color: #f8f9fa;
         }
-</script>
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .header img {
+            max-width: 100%;
+            height: auto;
+        }
+        .card-custom {
+            margin: 1rem 0;
+        }
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #e9ecef;
+        }
+    </style>
 </head>
 <body>
-	<form method="get" id="form">
-        Usuario: <input type="text" name="user"></br>
-        Elige el servelt a usar: <br>
-        <input type="hidden" name="log" id="selectLog">
-        <input type="submit" value="Log0" onclick="selectServlet('log0')">
-        <input type="submit" value="Log1" onclick="selectServlet('log1')">
-        <input type="submit" value="Log2" onclick="selectServlet('log2')">
-    </form>
+
+    <div class="container">
+        <div class="header">
+            <img src="imagenes/logo.png" alt="Bienvenido a Notas Online">
+            <p>¡Consulta los resultados de tus pruebas!</p>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-custom">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Si eres Alumno/a...</h5>
+                        <p class="card-text">Podrás consultar tus calificaciones. Debes contar con tus datos identificativos.</p>
+                        <a href="LoginAlumno.html" class="btn btn-primary">Acceso Alumnado</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card card-custom">
+                    <div class="card-body">
+                        <h5 class="card-title text-success">Si eres Profesor/a...</h5>
+                        <p class="card-text">Podrás consultar o modificar las calificaciones de tus asignaturas. Debes contar con los datos identificativos.</p>
+                        <a href="Login_prof.html" class="btn btn-success">Acceso Profesorado</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="blog-footer">
+        <p class="lead my-3">© 2024 - Trabajo realizado por el grupo 3ti11_g1 para la asignatura de Desarrollo Web</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
