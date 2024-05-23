@@ -32,7 +32,7 @@ public class DataServlet extends HttpServlet {
         
         // Selecciona la operación en función del parámetro 'action'
 
-
+        /**
         switch(action){
             case equals("login"): //Va a haber que sacar el login de aquí
             //Y meterlo en otro .java junto con handleLogin() handleLogin lo mismo
@@ -44,7 +44,10 @@ public class DataServlet extends HttpServlet {
             case equals("listaAsignaturas"):
                 getListaAsignaturas(request, response);
                 break;
-        }
+        } **/
+        
+        
+        
     }
 
     /**
@@ -92,10 +95,6 @@ public class DataServlet extends HttpServlet {
                 }
     
             }
-
-
-
-
     }
 
 
