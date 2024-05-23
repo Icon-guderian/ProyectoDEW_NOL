@@ -15,7 +15,7 @@ import org.json.JSONObject;
 @WebServlet("/dataServlet")
 public class DataServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String BASE_URL = "http://localhost:9090/CentroEducativo";
+    private static final String BASE_URL = "http://localhost:9090/CentroEducativo/alumnos/";
     private HttpClient client;
 
     @Override
