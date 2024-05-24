@@ -36,6 +36,43 @@ public class DataServlet extends HttpServlet {
         
         HttpSession session = request.getSession(false);
         
+        if(session == null) {
+            //Cogemos los datos del usuario y creamos el JSON
+            String usuario = req.getRemoteUser();
+            String user = usuarios.get(usuario).getDni();
+            String pass = usuarios.get(usuario).getPassword();;
+            JSONObject loginCredsJSON = new JSONObject();
+       
+            loginCredsJSON.put("dni", user);
+            loginCredsJSON.put("password", pass);
+            StringEntity loginCredsString = new StringEntity(loginCredsJSON.toString());
+            
+            BasicCookieStore cookieStore = new BasicCookieStore();
+            CloseableHttpClient httpclient = HttpClients.custom().setDefaultCookieStore(cookieStore).build();
+                HttpPost httpPost = new HttpPost(BASE_URL + "/login");
+                httpPost.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+                httpPost.setEntity(loginCredsString);
+                CloseableHttpResponse responseFromCentro = httpclient.execute(httpPost);
+                String keyRes = "-1";
+                    HttpEntity resCentro = responseFromCentro.getEntity();
+                    try {
+                        keyRes = EntityUtils.toString(resCentro);
+                        
+                    }catch (ParseException e) {
+                    }
+                    
+                    EntityUtils.consume(resCentro);
+                    responseFromCentro.close();
+                if(responseFromCentro.getCode() == 200 && !keyRes.equals("-1")){
+                        session.setAttribute("dni", user);
+			            session.setAttribute("key", keyRes);
+                        response.sendRedirect(req.getContextPath() + "/alumnoPrincipal.html");
+                } else {
+                    // Si la respuesta es un error, envía un código de error HTTP
+                    response.sendError(httpResponse.statusCode(), "Login failed");
+                }
+                
+            }
         
         
     }
@@ -62,7 +99,6 @@ public class DataServlet extends HttpServlet {
                  response.setContentType("application/json");
                  response.getWriter().write(httpResponse.body());
                  response.setCharacterEncoding("UTF-8");
-                 response.
                  
                  //Mandamos la respuesta en formato json al cliente
                  PrintWriter out = response.getWriter();
