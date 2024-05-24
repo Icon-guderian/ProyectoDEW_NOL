@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Certificado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .certificate-container {
+            width: 700px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            background-color: #f8f9fa;
+            color: #fff;
+            padding: 10px;
+        }
+        .subheader {
+            text-align: center;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .subtitle {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .content {
+            font-size: 16px;
+            line-height: 1.6;
+            position: relative;
+        }
+        .content .info {
+            width: 60%;
+        }
+        .content img {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .back-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+        }
+        span {
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        function fecha(){
+            const hoy = new Date();
+            const year = hoy.getFullYear();
+            const day = hoy.getDate();
+            const month = hoy.getMonth() + 1;
+            document.getElementById("fecha").innerHTML = `En Valencia, a ${day}/${month}/${year}`;
+        }
+    </script>
+</head>
+<body onload="fecha()">
+    <div class="certificate-container">
+        <div class="header">
+            <div class="title">
+                <img src="imagenes\logo.png" alt="Logo">
+            </div>
+        </div>
+        <div class="subtitle subheader">Certificado sin validez académica</div>
+        <div class="content">
+            <div class="info">
+                <p><b>DEW - Centro Educativo</b> certifica que D/Dª <span class="Variable_nombre">Amelia Gómez Fernández</span>, con DNI <span class="Variable_DNI"></span>77666555F, matriculado/a en el curso 2023/24, ha obtenido las calificaciones que se muestran en la siguiente tabla.</p>
+            </div>
+            <img src="" alt="Imagen del Usuario">
+            <table>
+                <tr>
+                    <th>Acrónimo</th>
+                    <th>Asignatura</th>
+                    <th>Calificación</th>
+                </tr>
+                <tr>
+                    <td>DEW</td>
+                    <td>Desarrollo Web</td>
+                    <td>9.25</td>
+                </tr>
+                <tr>
+                    <td>DCU</td>
+                    <td>Desarrollo Centrado en el Usuario</td>
+                    <td>6.55</td>
+                </tr>
+                <tr>
+                    <td>IAP</td>
+                    <td>Integración de Aplicaciones</td>
+                    <td>8.25</td>
+                </tr>
+            </table>
+        </div>
+        <div class="footer" id="fecha">
+            En Valencia, a 11 de mayo de 2021
+        </div>
+        <a href="" class="btn btn-danger logout-btn">Volver</a> 
+    </div>
+</body>
+</html>
